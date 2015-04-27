@@ -25,9 +25,6 @@
                     <option value="-age">Oldest</option>
                 </select>
             </div>
-            <%--<div class="col-lg-10">
-
-            </div>--%>
             <div class="col-md-10">
                 <ul class="phones">
                     <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
@@ -39,6 +36,7 @@
         </div>
 
     </div>
+    <%--<pre>{{phones | filter:query | orderBy:orderProp | json}}</pre>--%>
     <p>Total number of phones: {{phones.length}}</p>
 </body>
 </html>
