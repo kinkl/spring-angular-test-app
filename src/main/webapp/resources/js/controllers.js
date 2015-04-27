@@ -1,8 +1,23 @@
-var phonecatApp = angular.module('phonecatApp', []);
+var phonecatApp = angular.module('phonecatApp', ['ngRoute', 'phonecatControllers']);
 
-phonecatApp.controller('PhoneListCtrl', ['$scope', '$http', function($scope, $http) {
+phonecatApp.config(['$routeProvider', function($routeProvider) {
+    $routeProvider.
+        when('/phones', {
+            templateUrl: '/resources/partials/phone-list.html',
+            controller: 'PhoneListCtrl'
+        }).
+        when('/phones/:phoneId', {
+            templateUrl: '/resources/partials/phone-detail.html',
+            controller: 'PhoneDetailCtrl'
+        }).
+        otherwise({
+            redirectTo: '/phones'
+        });
+}]);
 
+var phonecatControllers = angular.module('phonecatControllers', []);
 
+phonecatControllers.controller('PhoneListCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.phones = [];
     $scope.phonesJson = '';
 
@@ -12,4 +27,8 @@ phonecatApp.controller('PhoneListCtrl', ['$scope', '$http', function($scope, $ht
     });
 
     $scope.orderProp = 'age';
+}]);
+
+phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', function($scope, $routeParams) {
+    $scope.phoneId = $routeParams.phoneId;
 }]);
