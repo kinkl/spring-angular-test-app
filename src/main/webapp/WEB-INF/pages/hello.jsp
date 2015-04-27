@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html ng-app="phonecatApp" ng-controller="PhoneListCtrl">
 <head>
     <link rel="stylesheet" href="/resources/css/bootstrap.css"/>
@@ -15,11 +16,21 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2">
-                Search: <input ng-model="query"/>
+                Search: <input class="form-control" placeholder="Поиск..." ng-model="query"/><br/>
+                Sort by:
+                <select class="form-control" ng-model="orderProp">
+                    <option value="name">Alphabetical</option>
+                    <option value="-name">Alphabetical (reverse)</option>
+                    <option value="age">Newest</option>
+                    <option value="-age">Oldest</option>
+                </select>
             </div>
+            <%--<div class="col-lg-10">
+
+            </div>--%>
             <div class="col-md-10">
                 <ul class="phones">
-                    <li ng-repeat="phone in phones | filter:query">
+                    <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
                         {{phone.name}}
                         <p>{{phone.snippet}}</p>
                     </li>
