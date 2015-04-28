@@ -28,7 +28,9 @@
     <h3>Adding some math</h3>
     <p>one plus two equals <b>{{1 + 2}}</b></p>
     <h3>Cellphone List</h3>--%>
-    <div ng-view></div>
+    <div class="view-container">
+        <div ng-view class="view-frame"></div>
+    </div>
 
 </body>
 </html>
