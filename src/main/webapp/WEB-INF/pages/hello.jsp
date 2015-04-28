@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<html ng-app="phonecatApp" ng-controller="PhoneListCtrl">
+<html ng-app="phonecatApp">
 <head>
     <link rel="stylesheet" href="/resources/css/bootstrap.css"/>
     <script src="/resources/js/angular.js"></script>
@@ -9,11 +9,11 @@
     <%--<title>Cell Phones: {{query}}</title>--%>
 </head>
 <body>
-	<h2>${message}</h2>
+	<%--<h2>${message}</h2>
     <img src="/resources/images/a_lot_of_fun.jpg"/>
     <h3>Adding some math</h3>
     <p>one plus two equals <b>{{1 + 2}}</b></p>
-    <h3>Cellphone List</h3>
+    <h3>Cellphone List</h3>--%>
     <div ng-view></div>
 
 </body>
