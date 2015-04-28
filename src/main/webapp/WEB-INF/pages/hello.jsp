@@ -4,8 +4,10 @@
     <link rel="stylesheet" href="/resources/css/bootstrap.css"/>
     <script src="/resources/js/angular.js"></script>
     <script src="/resources/js/angular-route.js"></script>
+    <script src="/resources/js/angular-resource.js"></script>
     <script src="/resources/js/controllers.js"></script>
     <script src="/resources/js/filters.js"></script>
+    <script src="/resources/js/services.js"></script>
     <title ng-bind-template="Cell Phones: {{query}}">Cell Phones</title>
     <%--<title>Cell Phones: {{query}}</title>--%>
 </head>

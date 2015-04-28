@@ -1,4 +1,4 @@
-var phonecatApp = angular.module('phonecatApp', ['ngRoute', 'phonecatControllers', 'phonecatFilters']);
+var phonecatApp = angular.module('phonecatApp', ['ngRoute', 'phonecatControllers', 'phonecatFilters', 'phonecatServices']);
 
 phonecatApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
@@ -17,23 +17,18 @@ phonecatApp.config(['$routeProvider', function($routeProvider) {
 
 var phonecatControllers = angular.module('phonecatControllers', []);
 
-phonecatControllers.controller('PhoneListCtrl', ['$scope', '$http', function($scope, $http) {
-    $scope.phones = [];
-    $scope.phonesJson = '';
-
-    $http.get('/resources/json/phones.json').success(function(data) {
-        $scope.phones = data;
-        $scope.phonesJson = data.splice(0, 5);
-    });
-
+phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone', function($scope, Phone) {
+    $scope.phones = Phone.query();
     $scope.orderProp = 'age';
 }]);
 
-phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
-    $http.get('/resources/json/' + $routeParams.phoneId + '.json').success(function(data) {
-        $scope.phone = data;
-        $scope.mainImageUrl = data.images[0];
+phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone', function($scope, $routeParams, Phone) {
+    $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
+        $scope.mainImageUrl = phone.images[0];
     });
+
+    /*$http.get('/resources/json/' + $routeParams.phoneId + '.json').success(function(data) {
+    });*/
 
     $scope.setImage = function(imageUrl) {
         $scope.mainImageUrl = imageUrl;
