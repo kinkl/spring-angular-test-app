@@ -14,14 +14,14 @@ public class HelloController {
 		return "hello";
 	}
 
-    @RequestMapping(value = "/smartphones", method = RequestMethod.GET)
+    @RequestMapping(value = "/smartphones", method = RequestMethod.GET, headers = {"Accept=application/json"})
     public @ResponseBody PhoneDTO[] getSmartphones() throws InterruptedException {
         Thread.sleep(1000); //Imitation of rough activity
         PhoneDTO[] phoneDTOs = {new PhoneDTO("HTC Wildfire S"), new PhoneDTO("Samsung Galaxy Tab")};
         return phoneDTOs;
     }
 
-    @RequestMapping(value = "/smartphones/{smartphoneId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/smartphones/{smartphoneId}", method = RequestMethod.GET, headers = {"Accept=application/json"})
     public @ResponseBody PhoneDTO getSmartphone(@PathVariable String smartphoneId) {
         PhoneDTO phoneDTO = new PhoneDTO(smartphoneId);
         return phoneDTO;
