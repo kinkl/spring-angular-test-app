@@ -37,6 +37,11 @@ phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone', 'Smartphone'
 
     $scope.updateCurrentSmartphone('n9');
 
+    function refresh() {
+        $scope.fetchAllSmartphones();
+        $scope.updateCurrentSmartphone(newSmartphone.id);
+    }
+
     $scope.newSmartphoneId = '';
     $scope.newSmartphoneName = '';
     $scope.newSmartphoneDescription = '';
@@ -46,12 +51,12 @@ phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone', 'Smartphone'
             name: $scope.newSmartphoneName,
             description: $scope.newSmartphoneDescription
         };
-        Smartphone.save(newSmartphone, function() {
-            $scope.fetchAllSmartphones();
-            $scope.updateCurrentSmartphone(newSmartphone.id);
-        });
+        Smartphone.save(newSmartphone, refresh);
+    };
 
-    }
+    $scope.deleteSmartphone = function(smartphoneId) {
+        Smartphone.delete({smartphoneId: smartphoneId}, refresh);
+    };
 }]);
 
 phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone', function($scope, $routeParams, Phone) {

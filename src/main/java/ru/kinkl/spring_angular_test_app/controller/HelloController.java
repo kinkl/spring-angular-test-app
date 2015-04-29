@@ -42,4 +42,10 @@ public class HelloController {
     public void addSmartphone(@RequestBody PhoneDTO smartphone) {
         phones.put(smartphone.getId(), smartphone);
     }
+
+    @RequestMapping(value = "/smartphones/{smartphoneId}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteSmartphone(@PathVariable("smartphoneId") String smartphoneId) {
+        phones.remove(smartphoneId);
+    }
 }
