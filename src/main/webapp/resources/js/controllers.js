@@ -31,7 +31,27 @@ phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone', 'Smartphone'
         });
     };
 
-    $scope.concreteSmartphone = Smartphone.get({smartphoneId: 'NOKIA-N9'});
+    $scope.updateCurrentSmartphone = function(smartphoneId) {
+        $scope.concreteSmartphone = Smartphone.get({smartphoneId: smartphoneId});
+    };
+
+    $scope.updateCurrentSmartphone('n9');
+
+    $scope.newSmartphoneId = '';
+    $scope.newSmartphoneName = '';
+    $scope.newSmartphoneDescription = '';
+    $scope.addNewSmartphone = function() {
+        var newSmartphone = {
+            id: $scope.newSmartphoneId,
+            name: $scope.newSmartphoneName,
+            description: $scope.newSmartphoneDescription
+        };
+        Smartphone.save(newSmartphone, function() {
+            $scope.fetchAllSmartphones();
+            $scope.updateCurrentSmartphone(newSmartphone.id);
+        });
+
+    }
 }]);
 
 phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone', function($scope, $routeParams, Phone) {

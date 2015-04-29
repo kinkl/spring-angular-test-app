@@ -13,10 +13,14 @@
             <span ng-show="stubText">{{stubText}}</span>
             <ul>
                 <li ng-repeat="smartphone in smartphones">
-                    {{smartphone.name}}
+                    <a href="javascript:void(0)" ng-click="updateCurrentSmartphone(smartphone.id)">{{smartphone.name}}</a>
                 </li>
             </ul>
-            <div>Concrete: {{concreteSmartphone.name}}</div>
+            <div>Concrete: {{concreteSmartphone.name}} ({{concreteSmartphone.id}})<br/>"{{concreteSmartphone.description}}"</div><br/>
+            <input class="form-control" placeholder="ИД..." ng-model="newSmartphoneId"/><br/>
+            <input class="form-control" placeholder="Название..." ng-model="newSmartphoneName"/><br/>
+            <input class="form-control" placeholder="Описание..." ng-model="newSmartphoneDescription"/><br/>
+            <input type="button" value="Put new smartphone!" ng-click="addNewSmartphone()" class="form-control"/>
         </div>
         <div class="col-md-10">
             <ul class="phones">

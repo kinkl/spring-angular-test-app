@@ -10,5 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PhoneDTO {
+    private String id;
     private String name;
+    private String description;
 }
