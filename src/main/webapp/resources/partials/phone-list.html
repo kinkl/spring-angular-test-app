@@ -9,8 +9,14 @@
                 <option value="age">Newest</option>
                 <option value="-age">Oldest</option>
             </select><br/>
-            <input type="button" value="Ask BackEnd!" ng-click="fetchInfoAboutMyPhone()" class="form-control"/><br/>
-            <div>My phone: {{myPhone}}</div>
+            <input type="button" value="Ask BackEnd!" ng-click="fetchAllSmartphones()" class="form-control"/><br/>
+            <span ng-show="stubText">{{stubText}}</span>
+            <ul>
+                <li ng-repeat="smartphone in smartphones">
+                    {{smartphone.name}}
+                </li>
+            </ul>
+            <div>Concrete: {{concreteSmartphone.name}}</div>
         </div>
         <div class="col-md-10">
             <ul class="phones">

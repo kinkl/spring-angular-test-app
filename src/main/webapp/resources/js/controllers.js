@@ -17,30 +17,27 @@ phonecatApp.config(['$routeProvider', function($routeProvider) {
 
 var phonecatControllers = angular.module('phonecatControllers', []);
 
-phonecatControllers.controller('PhoneListCtrl', ['$scope', '$http', 'Phone', function($scope, $http, Phone) {
+phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone', 'Smartphone', function($scope, Phone, Smartphone) {
     $scope.phones = Phone.query();
 
     $scope.orderProp = 'age';
 
-    $scope.myPhone = 'no info';
+    $scope.stubText = 'no info';
 
-    $scope.fetchInfoAboutMyPhone = function() {
-        $scope.myPhone = 'fetching...';
-        $http.get('/my_phone').success(function(data, status, headers, config) {
-            $scope.myPhone = data.name;
-        }).error(function(data, status, headers, config) {
-            console.log('error!!!');
+    $scope.fetchAllSmartphones = function() {
+        $scope.stubText = 'fetching...';
+        $scope.smartphones = Smartphone.query(function(smartphones) {
+            $scope.stubText = 'Loaded ' + smartphones.length + ' records';
         });
     };
+
+    $scope.concreteSmartphone = Smartphone.get({smartphoneId: 'NOKIA-N9'});
 }]);
 
 phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone', function($scope, $routeParams, Phone) {
     $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
         $scope.mainImageUrl = phone.images[0];
     });
-
-    /*$http.get('/resources/json/' + $routeParams.phoneId + '.json').success(function(data) {
-    });*/
 
     $scope.setImage = function(imageUrl) {
         $scope.mainImageUrl = imageUrl;

@@ -7,3 +7,11 @@ phonecatServices.factory('Phone', ['$resource',
         });
     }
 ]);
+
+phonecatServices.factory('Smartphone', ['$resource',
+    function($resource) {
+        return $resource('/smartphones/:smartphoneId', {}, {
+            query: {method:'GET', isArray:true}
+        });
+    }
+]);
