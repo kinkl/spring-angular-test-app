@@ -17,9 +17,21 @@ phonecatApp.config(['$routeProvider', function($routeProvider) {
 
 var phonecatControllers = angular.module('phonecatControllers', []);
 
-phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone', function($scope, Phone) {
+phonecatControllers.controller('PhoneListCtrl', ['$scope', '$http', 'Phone', function($scope, $http, Phone) {
     $scope.phones = Phone.query();
+
     $scope.orderProp = 'age';
+
+    $scope.myPhone = 'no info';
+
+    $scope.fetchInfoAboutMyPhone = function() {
+        $scope.myPhone = 'fetching...';
+        $http.get('/my_phone').success(function(data, status, headers, config) {
+            $scope.myPhone = data.name;
+        }).error(function(data, status, headers, config) {
+            console.log('error!!!');
+        });
+    };
 }]);
 
 phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone', function($scope, $routeParams, Phone) {

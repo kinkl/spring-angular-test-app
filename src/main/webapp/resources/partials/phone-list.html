@@ -8,7 +8,9 @@
                 <option value="-name">Alphabetical (reverse)</option>
                 <option value="age">Newest</option>
                 <option value="-age">Oldest</option>
-            </select>
+            </select><br/>
+            <input type="button" value="Ask BackEnd!" ng-click="fetchInfoAboutMyPhone()" class="form-control"/><br/>
+            <div>My phone: {{myPhone}}</div>
         </div>
         <div class="col-md-10">
             <ul class="phones">
