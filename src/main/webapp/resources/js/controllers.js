@@ -32,15 +32,15 @@ phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone', 'Smartphone'
     };
 
     $scope.updateCurrentSmartphone = function(smartphoneId) {
-        $scope.concreteSmartphone = Smartphone.get({smartphoneId: smartphoneId});
+        if (smartphoneId) {
+            $scope.concreteSmartphone = Smartphone.get({smartphoneId: smartphoneId});
+        }
+        else {
+            $scope.concreteSmartphone = null;
+        }
     };
 
-    $scope.updateCurrentSmartphone('n9');
-
-    function refresh() {
-        $scope.fetchAllSmartphones();
-        $scope.updateCurrentSmartphone(newSmartphone.id);
-    }
+    $scope.updateCurrentSmartphone(null);
 
     $scope.newSmartphoneId = '';
     $scope.newSmartphoneName = '';
@@ -51,11 +51,22 @@ phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone', 'Smartphone'
             name: $scope.newSmartphoneName,
             description: $scope.newSmartphoneDescription
         };
-        Smartphone.save(newSmartphone, refresh);
+        Smartphone.save(newSmartphone, function() {
+            $scope.fetchAllSmartphones();
+            $scope.updateCurrentSmartphone(newSmartphone.id);
+        });
     };
 
     $scope.deleteSmartphone = function(smartphoneId) {
-        Smartphone.delete({smartphoneId: smartphoneId}, refresh);
+        Smartphone.delete({smartphoneId: smartphoneId}, function() {
+            $scope.fetchAllSmartphones();
+            if ($scope.smartphones && $scope.smartphones.length > 0) {
+                $scope.updateCurrentSmartphone($scope.smartphones[0].id);
+            }
+            else {
+                $scope.updateCurrentSmartphone(null);
+            }
+        });
     };
 }]);
 

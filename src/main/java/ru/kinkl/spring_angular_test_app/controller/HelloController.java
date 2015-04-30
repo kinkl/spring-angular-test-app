@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ru.kinkl.spring_angular_test_app.dto.PhoneDTO;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,9 +39,11 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/smartphones", method = RequestMethod.POST, headers = {"Content-Type=application/json"})
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void addSmartphone(@RequestBody PhoneDTO smartphone) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public @ResponseBody PhoneDTO addSmartphone(@RequestBody PhoneDTO smartphone, HttpServletResponse response) {
         phones.put(smartphone.getId(), smartphone);
+        response.setHeader("Location", "/smartphones/" + smartphone.getId());
+        return smartphone;
     }
 
     @RequestMapping(value = "/smartphones/{smartphoneId}", method = RequestMethod.DELETE)
