@@ -18,7 +18,11 @@
                     <span class="glyphicon glyphicon-flash" ng-click="deleteSmartphone(smartphone.id)"></span>
                 </li>
             </ul>
-            <div>Concrete: {{concreteSmartphone.name}} ({{concreteSmartphone.id}})<br/>"{{concreteSmartphone.description}}"</div><br/>
+            <div>
+                Concrete:
+                <span ng-show="concreteSmartphone">{{concreteSmartphone.name}} ({{concreteSmartphone.id}})<br/>"{{concreteSmartphone.description}}"</span>
+                <span ng-hide="concreteSmartphone" class="glyphicon glyphicon-fire"></span>
+            </div><br/>
             <input class="form-control" placeholder="ИД..." ng-model="newSmartphoneId"/><br/>
             <input class="form-control" placeholder="Название..." ng-model="newSmartphoneName"/><br/>
             <input class="form-control" placeholder="Описание..." ng-model="newSmartphoneDescription"/><br/>
