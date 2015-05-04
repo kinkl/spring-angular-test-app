@@ -17,6 +17,7 @@
     <%--<title>Cell Phones: {{query}}</title>--%>
 </head>
 <body>
+    <a href="/j_spring_security_logout">LOG OUT!</a>
     <%--<ul>
         <li>{{"lower case string" | uppercase}}</li>
         <li>{{ {foo: "bar", baz: 23} | json}}</li>
