@@ -13,6 +13,7 @@
     </security:authentication-manager>
 
     <security:http auto-config="true">
+        <security:intercept-url pattern="/resources/partials/phone-detail.html" access="ROLE_ADMIN"/>
         <security:intercept-url pattern="/**" access="ROLE_USER"/>
     </security:http>
 

@@ -15,3 +15,14 @@ phonecatServices.factory('Smartphone', ['$resource',
         });
     }
 ]);
+
+phonecatServices.factory('responseObserver', function($q, $location) {
+    return {
+        'responseError': function(rejection) {
+            if (rejection.status === 403) {
+                $location.path('/403');
+            }
+            return $q.reject(rejection);
+        }
+    };
+});
